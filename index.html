@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Draggable Container</title>
+  <style>
+    .draggable {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100px;
+      height: 50px;
+      background-color: rgb(44, 20, 151);
+      border: 1px solid black;
+      cursor: move;
+      display:flex;
+      align-items: center;
+      vertical-align: text-top;
+    }
+   
+  </style>
+</head>
+<body>
+  <div id="container" class="draggable">
+    
+  </div>
+  <script>
+    const container = document.getElementById('container');
+
+    let isDragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    container.addEventListener('mousedown', (event) => {
+      isDragging = true;
+      offsetX = event.clientX - container.offsetLeft;
+      offsetY = event.clientY - container.offsetTop;
+    });
+
+    document.addEventListener('mousemove', (event) => {
+      if (isDragging) {
+        container.style.top = `${event.clientY - offsetY}px`;
+        container.style.left = `${event.clientX - offsetX}px`;
+      }
+    });
+
+    document.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+  </script>
+</body>
+</html>
